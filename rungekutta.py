@@ -8,10 +8,10 @@ def classic_runge_kutta(f, y_0, step, t_0, T):
 
     number_steps = np.arange(t_0, t_0 + T + step, step)
     y = [y_0]
+    dt = step
 
     for j in range(len(number_steps) - 1):
 
-        dt = step
         p_n_1 = f(number_steps[j],y[j])
         t_n_2 = number_steps[j] + 1/2 * dt
         y_n_2 = y[j] + 1/2 * dt * p_n_1
@@ -29,12 +29,35 @@ def classic_runge_kutta(f, y_0, step, t_0, T):
 
     return  number_steps, y
 
-def general_runge_kutta(f, y_0, step, t_0, T, q):
-    """Implementing the general runga Kutta Method"""
-    pass
+def runge_kutta_higher_dimension(f, y_0, step, t_0, T):
+    """Implementing the runga Kutta Method MatrixWise"""
+    
+    number_steps = np.arange(t_0, t_0 + T + step, step)
+    y = np.array([y_0])
+    dt = step
+
+    for j in range(len(number_steps) - 1):
+
+        p_n_1 = f(y[j,:],number_steps[j])
+        t_n_2 = number_steps[j] + 1/2 * dt
+        y_n_2 = y[j,:] + 1/2 * dt * p_n_1
+        p_n_2 = f(y_n_2,t_n_2)
+
+        t_n_3 = t_n_2
+        y_n_3 = y[j,:] + 1/2 * dt * p_n_2
+        p_n_3 = f(y_n_3,t_n_3)
+
+        t_n_4 = number_steps[j] + dt
+        y_n_4 = y[j,:] + dt * p_n_3
+        p_n_4 = f(y_n_4,t_n_4)
+        
+        y = np.append(y, [y[j,:] + dt * (1/6 * p_n_1 + 2/6 * p_n_2 + 2/6 * p_n_3 + 1/6 * p_n_4)], axis=0)
+
+    return  number_steps, y
 
 
 test_runga = False
+
 if test_runga:
     def f(t,y) :  
         return 2 - np.exp(-4 * t) - 2*y

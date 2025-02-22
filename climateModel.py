@@ -15,7 +15,7 @@ twin2.spines["right"].set_position(("outward", 40))
 twin3.spines["right"].set_position(("outward", 60))
 twin4.spines["right"].set_position(("outward", 80))
 
-number_steps, y = euler_higher_diemension(f=derivative, y_0=x0, step=0.1, t_0=1850.0, T=750)
+number_steps, y = runge_kutta_higher_dimension(f=derivative, y_0=x0, step=0.1, t_0=1850.0, T=750)
 
 
 p0, = ax.plot(number_steps, y[:, 0], color="blue", label="Atmosphere")

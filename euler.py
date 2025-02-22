@@ -9,10 +9,9 @@ def euler(f,y_0,step,t_0,T):
     
     number_steps = np.arange(t_0, t_0 + T + step, step)
     y = [y_0]
+    dt = step
 
     for j in range(0,len(number_steps)-1):
-
-        dt = step
         y_n = y[j] + dt * f(number_steps[j],y[j])
         y.append(y_n)
 
@@ -33,11 +32,9 @@ def euler_higher_diemension(f, y_0 : list, step:float, t_0: float, T:float):
     return number_steps , y
 
 
-
 test = False
 
 # Example of Approximation 
-
 if test:
 
     def f(t,y) :
