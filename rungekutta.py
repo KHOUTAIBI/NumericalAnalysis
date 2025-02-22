@@ -33,7 +33,8 @@ def runge_kutta_higher_dimension(f, y_0, step, t_0, T):
     """Implementing the runga Kutta Method MatrixWise"""
     
     number_steps = np.arange(t_0, t_0 + T + step, step)
-    y = np.array([y_0])
+    y = np.zeros((len(number_steps), len(y_0)))
+    y[0,:] = y_0
     dt = step
 
     for j in range(len(number_steps) - 1):
@@ -51,7 +52,7 @@ def runge_kutta_higher_dimension(f, y_0, step, t_0, T):
         y_n_4 = y[j,:] + dt * p_n_3
         p_n_4 = f(y_n_4,t_n_4)
         
-        y = np.append(y, [y[j,:] + dt * (1/6 * p_n_1 + 2/6 * p_n_2 + 2/6 * p_n_3 + 1/6 * p_n_4)], axis=0)
+        y[j+1,:] = y[j,:] + dt * (1/6 * p_n_1 + 2/6 * p_n_2 + 2/6 * p_n_3 + 1/6 * p_n_4)
 
     return  number_steps, y
 
@@ -59,6 +60,7 @@ def runge_kutta_higher_dimension(f, y_0, step, t_0, T):
 test_runga = False
 
 if test_runga:
+
     def f(t,y) :  
         return 2 - np.exp(-4 * t) - 2*y
 

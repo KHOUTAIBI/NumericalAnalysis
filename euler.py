@@ -22,12 +22,14 @@ def euler_higher_diemension(f, y_0 : list, step:float, t_0: float, T:float):
     """Python Implementation for higher dimension Matrix"""
     
     number_steps = np.arange(t_0, t_0 + T + step, step)
-    y = np.array([y_0])  
+    y = np.zeros((len(number_steps), len(y_0)))
+    y[0,:] = y_0  
     dt = step
     
+
     for j in range(len(number_steps) - 1):
-        y_n = y[j, :] + dt * f(y[j, :], number_steps[j])  
-        y = np.append(y, [y_n], axis=0) 
+        y[j+1,:] = y[j, :] + dt * f(y[j, :], number_steps[j])  
+         
 
     return number_steps , y
 
