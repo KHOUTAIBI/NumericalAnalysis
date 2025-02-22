@@ -30,13 +30,15 @@ g++ euler.cpp -o euler
 runge-kutta-euler/
 │── python/
 │   ├── euler.py
-│   ├── runge_kutta.py
-│   ├── main.py
+│   ├── rungekutta.py
+│   ├── climate.py
+    ├── carbon.py
 │
 │── cpp/
 │   ├── euler.cpp
-│   ├── runge_kutta.cpp
-│   ├── main.cpp
+│   ├── rungekutta.cpp
+│   ├── euler.h
+    ├── rungekutta.h
 │
 │── README.md
 ```
