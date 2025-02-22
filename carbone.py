@@ -1,4 +1,5 @@
 import numpy as np
+from euler import *
 
 # Initial conditions
 Atmosphere_Initial = 750

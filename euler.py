@@ -33,6 +33,6 @@ number_steps , y = euler(f=f, y_0=1, step=0.05, t_0=0, T=5)
 
 plt.grid()
 plt.plot(number_steps,y,label='Approximate Solution')
-plt.plot(number_steps,exact_function(number_steps),label='Approximate Solution')
+plt.plot(number_steps,exact_function(number_steps),label='exact')
 plt.legend()
 plt.show()
