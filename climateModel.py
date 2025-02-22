@@ -32,7 +32,7 @@ twin3.set_ylabel("Plants", color="green")
 twin4.set_ylabel("Soils", color="orange")
 
 lines = [p0, p1, p2, p3, p4]
-ax.legend(lines, [l.get_label() for l in lines], loc="upper left")
+ax.legend(lines, [l.get_label() for l in lines], loc="best")
 
 
 # plot and move left
