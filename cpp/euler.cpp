@@ -1,9 +1,4 @@
-#include <iostream>
-#include <eigen3/Eigen/Dense>
-
-
-using namespace Eigen;
-
+#include "euler.h"
 
 VectorXd euler(std::function<float(float,float)> f, float step, float y_0, float t_0, float T){
     

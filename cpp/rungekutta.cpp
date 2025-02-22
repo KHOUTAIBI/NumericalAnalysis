@@ -1,7 +1,4 @@
-#include <iostream>
-#include <eigen3/Eigen/Dense>
-
-using namespace Eigen;
+#include "rungekutta.h"
 
 VectorXd rungekutta(std::function<float(float,float)> f, float step, float y_0, float t_0, float T){
     
