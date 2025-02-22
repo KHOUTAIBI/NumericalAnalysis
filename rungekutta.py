@@ -34,20 +34,20 @@ def general_runge_kutta(f, y_0, step, t_0, T, q):
     pass
 
 
+test_runga = False
+if test_runga:
+    def f(t,y) :  
+        return 2 - np.exp(-4 * t) - 2*y
 
-# def f(t,y) :
-    # return 2 - np.exp(-4 * t) - 2*y
-# 
-# def exact_function(t):
-    # return 1 + 1/2 * np.exp(-4 * t) -1/2 * np.exp(-2 * t)
-# 
-# number_steps , y = classic_runge_kutta(f=f, y_0=1, step=0.1, t_0=0, T=5)
-# 
-# Plotting the reuslts and the exact results
-# 
-# plt.grid()
-# plt.plot(number_steps,y,label='Approximate Solution')
-# plt.plot(number_steps,exact_function(number_steps),label='exact',color='pink')
-# plt.legend()
-# plt.show()
+    def exact_function(t):  
+        return 1 + 1/2 * np.exp(-4 * t) -1/2 * np.exp(-2 * t)
+    
+    number_steps , y = classic_runge_kutta(f=f, y_0=1, step=0.1, t_0=0, T=5)
+    # Plotting the reuslts and the exact results
+
+    plt.grid()
+    plt.plot(number_steps,y,label='Approximate Solution')
+    plt.plot(number_steps,exact_function(number_steps),label='exact',color='pink')
+    plt.legend()
+    plt.show()
 
