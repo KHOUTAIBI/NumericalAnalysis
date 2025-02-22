@@ -3,13 +3,14 @@ from euler import *
 
 # Initial conditions
 Atmosphere_Initial = 750
-CarbonateRock_Initial = 100000000
+CarbonateRock_Initial = 100000000   
 DeepOcean_Initial = 38000
 FossilFuel_Initial = 7500
 Plant_Initial = 560
 Soil_Initial = 1500
 SurfaceOcean_Initial = 890
 VegLandArea_percent_Initial = 100
+
 
 x0 = np.array([Atmosphere_Initial,
                CarbonateRock_Initial,
@@ -30,24 +31,34 @@ Deforestation = 0
 # Helper functions
 def AtmCO2(Atmosphere):
     return Atmosphere * (280/Atmosphere_Initial)
+
 def GlobalTemp(AtmCO2):
     return 15 + ((AtmCO2-280) * .01)
+
 def CO2Effect(AtmCO2):
     return 1.5 * ((AtmCO2) - 40) / ((AtmCO2) + 80)
+
 def WaterTemp(GlobalTemp):
     return 273+GlobalTemp
+
 def TempEffect(GlobalTemp):
     return ((60 - GlobalTemp) * (GlobalTemp + 15)) / (((60 + 15) / 2) ** (2))/.96
+
 def SurfCConc(SurfaceOcean):
     return (SurfaceOcean/12000)/SurfOcVol
+
 def Kcarb(WaterTemp):
     return .000575+(.000006*(WaterTemp-278))
+
 def KCO2(WaterTemp):
     return .035+(.0019*(WaterTemp-278))
+
 def HCO3(Kcarb, SurfCConc):
     return(SurfCConc-(np.sqrt(SurfCConc**2-Alk*(2*SurfCConc-Alk)*(1-4*Kcarb))))/(1-4*Kcarb)
+
 def CO3(HCO3):
     return (Alk-HCO3)/2
+
 def pCO2Oc(KCO2, HCO3, CO3):
     return 280*KCO2*(HCO3**2/CO3)
 
@@ -59,6 +70,7 @@ def FossilFuelsCombustion(t):
     i = 0
     if t >= FossFuelData[-1,0]:
         return FossFuelData[-1,1]
+    
     while i + 1 < len(FossFuelData) and t >= FossFuelData[i,0]:
         i = i + 1
     if i == 0:
@@ -66,7 +78,9 @@ def FossilFuelsCombustion(t):
     else:
         return FossFuelData[i-1,1] + (t - FossFuelData[i-1,0]) / (FossFuelData[i,0] - FossFuelData[i-1,0]) * (FossFuelData[i,1] - FossFuelData[i-1,1])
 
+
 def derivative(x, t):
+
     Atmosphere = x[0]
     CarbonateRock = x[1]
     DeepOcean = x[2]
@@ -87,10 +101,13 @@ def derivative(x, t):
     HCO3_ = HCO3(Kcarb(WaterTemp_), SurfCConc(SurfaceOcean))
     pCO2Oc_ = pCO2Oc(KCO2(WaterTemp_), HCO3_, CO3(HCO3_))
     AtmOcExchange = Kao*(AtmCO2_-pCO2Oc_)
+    
     if x[3] > 0:
         FossilFuelsCombustion_ = FossilFuelsCombustion(t)
+    
     else:
         FossilFuelsCombustion_ = 0
+
     dAtmosphere_dt = (PlantResp + SoilResp + Volcanoes + FossilFuelsCombustion_
                           - Photosynthesis - AtmOcExchange)
 
@@ -122,6 +139,7 @@ def derivative(x, t):
         dSurfaceOcean_dt,
         dVegLandArea_percent_dt
         ])
+
 
     return derivative
 
