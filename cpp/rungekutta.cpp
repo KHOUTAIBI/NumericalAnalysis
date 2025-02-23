@@ -22,8 +22,9 @@ VectorXd rungekutta(std::function<float(float,float)> f, float step, float y_0, 
         float y_n_4 = y(j) + step * p_n_3;
         float p_n_4 = f(t_n_4, y_n_4);
         
-        y(j+1) = y(j) + step * (1/6 * p_n_1 + 2/6 * p_n_2 + 2/6 * p_n_3 + 1/6 * p_n_4);
-
+        
+        y(j+1) = y(j) + step * (1/6.f * p_n_1 + 2/6.f * p_n_2 + 2/6.f * p_n_3 + 1/6.f * p_n_4);
+        
     }
 
     return y;
@@ -31,20 +32,21 @@ VectorXd rungekutta(std::function<float(float,float)> f, float step, float y_0, 
 
 
 float f(float t, float y){
-    return std::exp(-t);   
+    return std::cos(t);   
 }
 
 int main(int argc, const char * argv[]){
-    VectorXd y = rungekutta(f,0.01,1,0,10);
-    int number_steps = static_cast<int>(10/0.01);
-    VectorXd t = ArrayXd::LinSpaced(number_steps + 1,1,1+10);
+    
+    VectorXd y = rungekutta(f,0.1,1,0,10);
+
+    int number_steps = static_cast<int>(10/0.1);
+    VectorXd t = ArrayXd::LinSpaced(number_steps + 1,0,0+10);
 
     std::vector<double> x_vec(t.data(), t.data() + t.size());
     std::vector<double> y_vec(y.data(), y.data() + y.size());
 
     plt::figure();
+    plt::title("Approximation using Runge-Kutta");
     plt::plot(x_vec,y_vec);
     plt::show();
-
-    std::cout << y << '\n';
 }
