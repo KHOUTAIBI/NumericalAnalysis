@@ -32,8 +32,9 @@ VectorXd rungekutta(std::function<float(float,float)> f, float step, float y_0, 
 
 
 float f(float t, float y){
-    return std::cos(t);   
+    return 2 - std::exp(-4 * t) - 2*y;   
 }
+
 
 int main(int argc, const char * argv[]){
     
