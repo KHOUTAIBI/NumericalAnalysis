@@ -17,6 +17,8 @@ python euler.py
 python rungekutta.py
 ```
 
+
+
 ### Compiling and Running the C++ Implementation
 ```sh
 g++ rungekutta.cpp -o runge_kutta_euler
@@ -24,6 +26,22 @@ g++ rungekutta.cpp -o runge_kutta_euler
 g++ euler.cpp -o euler
 ./euler
 ```
+
+## Dependencies
+
+This project requires the following dependencies:
+
+- **Eigen**: A C++ template library for linear algebra.
+
+### Installing Eigen
+
+You can install Eigen using a package manager or include it manually:
+
+#### Option 1: Install via Package Manager
+
+**Ubuntu/Debian:**
+```bash
+sudo apt-get install libeigen3-dev
 
 ## File Structure
 ```
