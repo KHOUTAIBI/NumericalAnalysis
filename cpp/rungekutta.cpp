@@ -36,5 +36,15 @@ float f(float t, float y){
 
 int main(int argc, const char * argv[]){
     VectorXd y = rungekutta(f,0.01,1,0,10);
+    int number_steps = static_cast<int>(10/0.01);
+    VectorXd t = ArrayXd::LinSpaced(number_steps + 1,1,1+10);
+
+    std::vector<double> x_vec(t.data(), t.data() + t.size());
+    std::vector<double> y_vec(y.data(), y.data() + y.size());
+
+    plt::figure();
+    plt::plot(x_vec,y_vec);
+    plt::show();
+
     std::cout << y << '\n';
 }
