@@ -42,6 +42,7 @@ You can install Eigen using a package manager or include it manually:
 **Ubuntu/Debian:**
 ```bash
 sudo apt-get install libeigen3-dev
+```
 
 ## File Structure
 ```
