@@ -6,11 +6,11 @@ add_definitions(-std=c++17 -Wall -O2 -pedantic)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 find_package(Python3 COMPONENTS Interpreter Development REQUIRED)
-
+find_package(Matplot++ REQUIRED)
 
 include_directories(
     /usr/local/include/eigen3   
-    ${Python3_INCLUDE_DIRS}     
+    ${Python3_INCLUDE_DIRS}    
 )
 
 
@@ -18,4 +18,4 @@ add_executable(${PROJECT_NAME} climate.cpp
 euler.cpp
 )
 
-target_link_libraries(climate PRIVATE ${Python3_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} PRIVATE ${Python3_LIBRARIES} Matplot++::matplot)
