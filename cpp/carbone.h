@@ -78,38 +78,41 @@ float pCO2Oc(float KCO2,float HCO3, float CO3){
 
 
 // Fossil fuels
-MatrixXf FossFuelData { {1850.0, 0.00}, 
-                        {1875.0, 0.30}, 
-                        {1900.0, 0.60}, 
-                        {1925.0, 1.35}, 
-                        {1950.0, 2.85}, 
-                        {1975.0, 4.95}, 
-                        {2000.0, 7.20}, 
-                        {2025.0, 10.05}, 
-                        {2050.0, 14.85}, 
-                        {2075.0, 20.70}, 
-                        {2100.0, 30.00} };
+const Matrix<float,11,2> FossFuelData = (Eigen::Matrix<float, 11, 2>() << 
+1850.0, 0.00,
+1875.0, 0.30,
+1900.0, 0.60,
+1925.0, 1.35,
+1950.0, 2.85,
+1975.0, 4.95,
+2000.0, 7.20,
+2025.0, 10.05,
+2050.0, 14.85,
+2075.0, 20.70,
+2100.0, 30.00).finished();
 
 
-                        // funcitons to use
+// funcitons to use
 float FossilFuelsCombustion(float t){
     int i = 0;
-    if (t >= FossFuelData(-1,0)){
-        return FossFuelData[-1,1];
+    if (t >= FossFuelData(FossFuelData.rows() - 1, 0)){
+        return FossFuelData(FossFuelData.rows() - 1, 1);
     }
-    
-    while (i + 1 < FossFuelData.size() && t >= FossFuelData(i,0)){
+    while (i + 1 < FossFuelData.rows() && t >= FossFuelData(i, 0)){
         i = i + 1;
-        if (i == 0){
-            return FossFuelData(0,1);
-        }
-        else{
-            return FossFuelData(i-1,1) + (t - FossFuelData(i-1,0)) / (FossFuelData(i,0) - FossFuelData(i-1,0)) * (FossFuelData(i,1) - FossFuelData(i-1,1));
-        }
+    }
+    if (i == 0){
+        return FossFuelData(0, 1);
+    }
+    else{
+        return FossFuelData(i-1, 1) + (t - FossFuelData(i-1, 0)) / 
+               (FossFuelData(i, 0) - FossFuelData(i-1, 0)) * 
+               (FossFuelData(i, 1) - FossFuelData(i-1, 1));
     }
 }
+                        
 
-VectorXf derivative(VectorXf x, float t){
+VectorXf derivative(float t,VectorXf x){
 
     float Atmosphere = x(0);
     float CarbonateRock = x(1);

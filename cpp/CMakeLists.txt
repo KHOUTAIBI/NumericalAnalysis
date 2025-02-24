@@ -14,6 +14,8 @@ include_directories(
 )
 
 
-add_executable(climate rungekutta.cpp)
+add_executable(${PROJECT_NAME} climate.cpp
+euler.cpp
+)
 
 target_link_libraries(climate PRIVATE ${Python3_LIBRARIES})
