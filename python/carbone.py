@@ -26,7 +26,7 @@ x0 = np.array([Atmosphere_Initial,
 Alk = 2.222446077610055
 Kao = .278
 SurfOcVol = .0362
-Deforestation = 1.0
+Deforestation = 0.0
 
 # Helper functions
 def AtmCO2(Atmosphere):
