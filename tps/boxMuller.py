@@ -23,6 +23,15 @@ normalX = np.random.normal(size=1000)
 end = time.time()
 print(f"Runtime of the built in numpy function is: {end-start}")
 
+def cauchy(n):
+    U = np.random.uniform(0, 1, n)
+    return 1 / np.tan(np.pi * U)
+
+def exponential(labda, n):
+    assert labda > 0
+    U = np.random.uniform(0, 1, n)
+    return -1/labda * np.log(1-U)
+
 
 
 
