@@ -4,6 +4,7 @@
 using namespace matplot;
 
 int main(int argc, char * argv[]){
+    printf("Initializing the algorithm and plot");
     float step = 0.1;
     float T = 750;
     float t_0 = 1850;
@@ -11,7 +12,6 @@ int main(int argc, char * argv[]){
 
     VectorXd t = ArrayXd::LinSpaced(number_steps + 1, t_0, t_0+T);
     MatrixXf y = euler_higher_diemension(derivative,step,x0,t_0,T);
-    
 
 
     std::vector<double> x_time(t.data(), t.data() + t.size());

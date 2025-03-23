@@ -32,47 +32,47 @@ const float SurfOcVol = .0362;
 const float Deforestation = 1.0;
 
 // Helper functions
-float AtmCO2(float Atmosphere){
+inline float AtmCO2(float Atmosphere){
     return Atmosphere * (280/Atmosphere_Initial);
 }
 
-float GlobalTemp(float AtmCO2){
+inline float GlobalTemp(float AtmCO2){
     return 15 + ((AtmCO2-280) * .01);
 }
 
-float CO2Effect(float AtmCO2){
+inline float CO2Effect(float AtmCO2){
     return 1.5 * ((AtmCO2) - 40) / ((AtmCO2) + 80);
 }
 
-float WaterTemp(float GlobalTemp){
+inline float WaterTemp(float GlobalTemp){
     return 273+GlobalTemp;
 }
 
-float TempEffect(float GlobalTemp){
+inline float TempEffect(float GlobalTemp){
     return ((60 - GlobalTemp) * (GlobalTemp + 15)) / ( pow(((60 + 15) / 2),(2)))/.96;
 }
 
-float SurfCConc(float SurfaceOcean){
+inline float SurfCConc(float SurfaceOcean){
     return (SurfaceOcean/12000)/SurfOcVol;
 }
 
-float Kcarb(float WaterTemp){
+inline float Kcarb(float WaterTemp){
     return .000575+(.000006*(WaterTemp-278));
 }
 
-float KCO2(float WaterTemp){
+inline float KCO2(float WaterTemp){
     return .035+(.0019*(WaterTemp-278));
 }
 
-float HCO3(float Kcarb,float SurfCConc){
+inline float HCO3(float Kcarb,float SurfCConc){
     return(SurfCConc-(sqrt(pow(SurfCConc,2)-Alk*(2*SurfCConc-Alk)*(1-4*Kcarb))))/(1-4*Kcarb);
 }
 
-float CO3(float HCO3){
+inline float CO3(float HCO3){
     return (Alk-HCO3)/2;
 }
 
-float pCO2Oc(float KCO2,float HCO3, float CO3){
+inline float pCO2Oc(float KCO2,float HCO3, float CO3){
     return 280*KCO2*(pow(HCO3,2)/CO3);
 }
 
