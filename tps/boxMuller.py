@@ -14,14 +14,15 @@ def box_muller(n: int) -> tuple:
 
     end = time.time()
     print(f"Runtime of the box muller function function is: {end-start}")
-    return X, Y
+    return X, Y, end-start
 
 
-X, Y = box_muller(1000)
+X, Y, _ = box_muller(100)
 start = time.time()
-normalX = np.random.normal(size=1000)
+normalX = np.random.normal(size=100)
 end = time.time()
 print(f"Runtime of the built in numpy function is: {end-start}")
+
 
 def cauchy(n):
     U = np.random.uniform(0, 1, n)
@@ -31,7 +32,5 @@ def exponential(labda, n):
     assert labda > 0
     U = np.random.uniform(0, 1, n)
     return -1/labda * np.log(1-U)
-
-
 
 

@@ -3,6 +3,7 @@
 
 using namespace matplot;
 
+
 int main(int argc, char * argv[]){
     printf("Initializing the algorithm and plot");
     float step = 0.1;
