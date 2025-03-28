@@ -11,7 +11,6 @@ Soil_Initial = 1500
 SurfaceOcean_Initial = 890
 VegLandArea_percent_Initial = 100
 
-
 x0 = np.array([Atmosphere_Initial,
                CarbonateRock_Initial,
                DeepOcean_Initial,
