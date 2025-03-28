@@ -98,7 +98,9 @@ def derivative(x, t):
     GlobalTemp_ = GlobalTemp(AtmCO2_)
     WaterTemp_ = WaterTemp(GlobalTemp_)
     Photosynthesis = 110 * CO2Effect(AtmCO2_) * (VegLandArea_percent/100) * TempEffect(GlobalTemp_)
-    HCO3_ = HCO3(Kcarb(WaterTemp_), SurfCConc(SurfaceOcean))
+    Kcarb_ = Kcarb(WaterTemp_)
+    SurfCConc_ = SurfCConc(SurfaceOcean)
+    HCO3_ = HCO3(Kcarb_, SurfCConc_)
     pCO2Oc_ = pCO2Oc(KCO2(WaterTemp_), HCO3_, CO3(HCO3_))
     AtmOcExchange = Kao*(AtmCO2_-pCO2Oc_)
     
@@ -137,7 +139,9 @@ def derivative(x, t):
         dPlants_dt,
         dSoils_dt,
         dSurfaceOcean_dt,
-        dVegLandArea_percent_dt
+        dVegLandArea_percent_dt,
+        Kcarb_,
+        SurfCConc_
         ])
 
 
