@@ -10,7 +10,7 @@
 using namespace Eigen;
 namespace plt = matplotlibcpp;
 
-VectorXd rungekutta(std::function<float(float,float)> f, float step, float y_0, float t_0, float T);
-MatrixXf rungekutta_higher_dimension(std::function<float(float,float)> f, float step, VectorXd y_0, float t_0, float T);
+VectorXf rungekutta(std::function<float(float,float)> f, float step, float y_0, float t_0, float T);
+std::pair<VectorXf, MatrixXf> rungekutta_higher_dimension(std::function<VectorXf(float, VectorXf)> f, float step, VectorXf y_0, float t_0, float T);
 
 #endif

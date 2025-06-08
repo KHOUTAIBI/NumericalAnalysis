@@ -1,12 +1,16 @@
 #include "carbone.h"
 #include "euler.h"
+#include <time.h>
 
 using namespace matplot;
 
 
 int main(int argc, char * argv[]){
-    printf("Initializing the algorithm and plot");
-    float step = 0.1;
+
+    clock_t start = clock();
+
+    printf("Initializing the algorithm and plot\n");
+    float step = 10e-5;
     float T = 750;
     float t_0 = 1850;
     int number_steps = static_cast<int>(T/step);
@@ -22,12 +26,6 @@ int main(int argc, char * argv[]){
     std::vector<double> y_Plants(y.col(4).data(), y.col(4).data() + y.col(4).size());
     std::vector<double> y_Soils(y.col(5).data(), y.col(5).data() + y.col(5).size());
 
-    hold(on);
-    plot(x_time,y_Atmosphere);
-    plot(x_time,y_DeepOcean);
-    plot(x_time,y_FossilFuel);
-    plot(x_time,y_Plants);
-    plot(x_time,y_Soils);
-    show();
+    printf("Time taken: %.2fs\n", (double)(clock() - start)/CLOCKS_PER_SEC);
 
 }

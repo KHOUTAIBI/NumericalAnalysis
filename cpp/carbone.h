@@ -112,7 +112,7 @@ float FossilFuelsCombustion(float t){
 }
                         
 
-VectorXf derivative(float t,VectorXf x){
+VectorXf derivative(float t, VectorXf x){
 
     float Atmosphere = x(0);
     float CarbonateRock = x(1);
